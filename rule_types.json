@@ -1,0 +1,9 @@
+{
+    "time_based":{
+        "info":"Delete files / folders with in a given folder which are older than a given retention period",
+        "params":{
+            "retention_period":0,
+            "retention_units":""
+        }
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "rule_id":"",
+    "folders":[
+        {
+            "path":"",
+            "rule":{
+                "type":"",
+                "params":{},
+                "exclusions":[],
+                "exclusions_regex":[]
+            },
+            "enabled":true
+        }
+    ]
+}
