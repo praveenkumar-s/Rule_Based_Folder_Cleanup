@@ -4,6 +4,12 @@ from os import path
 import shutil
 import sys
 
+
+def get_rule_object(Type, Params, Exclude=[]):
+    if(Type == 'based_on_retention'):
+        return based_on_retention_time(Params,Exclude)
+
+
 class based_on_retention_time():
     def __init__(self, Params, Exclude=[]):
         self.Params = Params
@@ -28,7 +34,7 @@ class based_on_retention_time():
 
     def mark(self, FolderPath):
         self.inflate()
-        result = {}
+        result = []
         items_in_dir = os.listdir(FolderPath)
         items_in_dir_after_exclusion = [x for x in items_in_dir if x not in self.Exclude]
         for objects in items_in_dir_after_exclusion:
@@ -37,10 +43,11 @@ class based_on_retention_time():
             last_modified_date = datetime.fromtimestamp(last_modified_date)
             TTL = last_modified_date - self.delete_files_before_date
             TTL_seconds = TTL.total_seconds()            
-            result[objects]={
+            result.append({
+                "name":objects,
                 "TTL":TTL_seconds,
                 "delete":(TTL_seconds<0)
-            }
+            })
         return result
 
     def clean(self,ParentFolderPath,ObjectsToDelete):
