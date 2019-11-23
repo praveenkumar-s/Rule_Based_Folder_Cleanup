@@ -55,10 +55,13 @@ class based_on_retention_time():
         exceptions=[]
         for items in ObjectsToDelete:
             try:
-                shutil.rmtree(path.join(ParentFolderPath,items))
-                log[ObjectsToDelete]="done"
+                if(os.path.isdir(path.join(ParentFolderPath,items))):
+                    shutil.rmtree(path.join(ParentFolderPath,items))
+                else:
+                    os.remove(path.join(ParentFolderPath,items))
+                log[items]="done"
             except:
-                log[ObjectsToDelete]="failed"
+                log[items]="failed"
                 exceptions.append(str(sys.exc_info()))
         return log,exceptions
         

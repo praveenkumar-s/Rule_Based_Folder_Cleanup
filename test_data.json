@@ -1,0 +1,27 @@
+{
+    "rule_id":"12345",
+    "folders":[
+        {
+            "path":"\\\\localhost\\delete_testing\\To_Print",
+            "rule":{
+                "type":"based_on_retention",
+                "params":{"retention_period":1,"retention_units":"DAYS"},
+                "exclusions":["pay_slip.pdf"],
+                "exclusions_regex":[],
+                "markers":[{"name":"Pan_Card.pdf","marked_on":"2018-11-23 22:05:50.116000"}]
+            },
+            "enabled":true
+        },
+        {
+            "path":"\\\\localhost\\delete_testing",
+            "rule":{
+                "type":"based_on_retention",
+                "params":{"retention_period":1,"retention_units":"DAYS"},
+                "exclusions":["WindowsPowerShell"],
+                "exclusions_regex":[],
+                "markers":[{"name":"gh2results.csv","marked_on":"2018-11-23 22:05:50.116000"},{"name":"gh2results_new.csv","marked_on":"2018-11-23 22:05:50.116000"}]
+            },
+            "enabled":true
+        }
+    ]
+}
