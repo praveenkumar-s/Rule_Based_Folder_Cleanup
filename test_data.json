@@ -1,5 +1,8 @@
 {
     "rule_id":"12345",
+    "name":"BBP_deletion_rules",
+    "enabled":1,
+    "interval":120,
     "folders":[
         {
             "path":"\\\\localhost\\delete_testing\\To_Print",
@@ -24,4 +27,5 @@
             "enabled":true
         }
     ]
-}
+
+    }
