@@ -2,6 +2,7 @@ import sys
 import rule_master
 from datetime import datetime
 import json
+import requests
 
 
 class task():
@@ -42,7 +43,9 @@ class task():
         return self.mark_result,clean_log,clean_exceptions
         
     
-    def report(self):
+    def report(self, rule_id,marker):
+        resp = requests.post("http://PRSUBRAMA-LT:5000/api/v1/ad_post_markers/{0}".format(rule_id),json=marker)
+        print(resp.status_code)
         pass
 
 
@@ -50,7 +53,9 @@ if __name__ == "__main__":
     #rule_id= sys.argv[1]
     #rule_data = {} # TODO:LOGIC TO retreive task data from server
     rule_data  = json.load(open('test_data.json','r'))
-    
+    rule_id = rule_data['rule_id']
+    markers={}
+    clean_log={}
     for items in rule_data['folders']:
         FolderPath = items['path']
         Rule = items['rule']
@@ -58,4 +63,12 @@ if __name__ == "__main__":
         action_item = task(FolderPath,Rule)
         d1,d2,d3=action_item.perform()
         print(d1,d2,d3)
-        action_item.report()
+
+        markers[FolderPath]=[]
+
+        for marks in d1:
+            markers[FolderPath].append({
+                "name":marks['name'],
+                "marked_on":str(datetime.now())
+            })
+    action_item.report(rule_id,markers)
